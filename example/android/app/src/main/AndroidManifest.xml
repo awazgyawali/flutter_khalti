@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.flutterkhaltiexample">
 
     <!-- The INTERNET permission is required for development. Specifically,
@@ -15,6 +16,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="flutter_khalti_example"
+        tools:replace="android:label"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
