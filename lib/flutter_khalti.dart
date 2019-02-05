@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/services.dart';
-import 'package:meta/meta.dart';
 
 class FlutterKhalti {
   static const MethodChannel channel = const MethodChannel('flutter_khalti');
