@@ -2,12 +2,12 @@
 # How to use
 
 ```
-    FlutterKhalti(
-      "your_public_key", //your public key
-      "productId",
-      "productName",
-      "productUrl",
-      12121, //amount in paisa
+ FlutterKhalti(
+      urlSchemeIOS: "KhaltiPayFlutterExampleScheme",
+      publicKey: "test_public_key_eacadfb91994475d8bebfa577b0bca68",
+      productId: "1233",
+      productName: "Test 2",
+      amount: 12121,
       customData: {
         "test": "asass",
       },
@@ -18,7 +18,7 @@
       },
       onError: (error) {
         print("error");
-        print(data); 
+        print(error);
       },
     );
 ```

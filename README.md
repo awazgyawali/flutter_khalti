@@ -8,19 +8,20 @@ Khalti SDK for flutter apps. Khalti Merchant can use this library to integrate t
 No change is required, works out of the box.
 
 ## IOS
-You have to add URL scheme to the project and send it as a parameter to the FlutterKhalti class.
+You have to add URL scheme to the project and send it as a parameter to the FlutterKhalti class as shown in the example code below.
 
-//todo add url example
+<!-- ![Khalti scheme setup overview](../img/customUrlScheme.png) -->
+![Khalti scheme setup overview](https://github.com/khalti/khalti-sdk-ios/blob/master/Screenshots/customUrlScheme.png) 
 
 # How to use
 
 ```
     FlutterKhalti(
-      "your_public_key", //your public key
-      "productId",
-      "productName",
-      "productUrl",
-      12121, //amount in paisa
+      urlSchemeIOS: "KhaltiPayFlutterExampleScheme",
+      publicKey: "test_public_key_eacadfb91994475d8bebfa577b0bca68",
+      productId: "1233",
+      productName: "Test 2",
+      amount: 12121,
       customData: {
         "test": "asass",
       },
@@ -31,7 +32,7 @@ You have to add URL scheme to the project and send it as a parameter to the Flut
       },
       onError: (error) {
         print("error");
-        print(data); 
+        print(error);
       },
     );
 ```
