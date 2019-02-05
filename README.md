@@ -3,10 +3,11 @@
 Khalti SDK for flutter apps. Khalti Merchant can use this library to integrate the payment system in their system.
 
 # Setup
-##Android
+
+## Android
 No change is required, works out of the box.
 
-##IOS
+## IOS
 You have to add URL scheme to the project and send it as a parameter to the FlutterKhalti class.
 
 //todo add url example
