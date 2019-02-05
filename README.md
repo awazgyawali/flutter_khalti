@@ -10,8 +10,7 @@ No change is required, works out of the box.
 ## IOS
 You have to add URL scheme to the project and send it as a parameter to the FlutterKhalti class as shown in the example code below.
 
-<!-- ![Khalti scheme setup overview](../img/customUrlScheme.png) -->
-![Khalti scheme setup overview](https://github.com/khalti/khalti-sdk-ios/blob/master/Screenshots/customUrlScheme.png) 
+![Khalti scheme setup overview](https://github.com/awazgyawali/flutter_khalti/blob/master/images/url_scheme.png) 
 
 # How to use
 
