@@ -1,3 +1,7 @@
-## 0.0.1
+## 0.3.0
 
-* TODO: Describe initial release.
+- Updated dependencies on both android and iOS
+
+## 0.2.0
+
+- Initial Release
