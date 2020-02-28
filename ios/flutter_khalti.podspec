@@ -16,7 +16,7 @@ A new flutter plugin project.
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.dependency 'Khalti'
-
+  s.swift_version = "4.1"
   s.ios.deployment_target = '8.0'
 end
 
