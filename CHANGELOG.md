@@ -1,3 +1,7 @@
+## 0.3.0+1
+
+- Increased compileSdkVersion to 28
+
 ## 0.3.0
 
 - Updated dependencies on both android and iOS
