@@ -1,3 +1,7 @@
+## 0.3.0+2
+
+- Fixed error coming to success callback
+
 ## 0.3.0+1
 
 - Increased compileSdkVersion to 28
