@@ -17,24 +17,24 @@ You have to add URL scheme to the project and send it as a parameter to the Flut
 # How to use
 
 ```
-    FlutterKhalti _flutterKhalti = FlutterKhalti.configure(
-      publicKey: "test_public_key_eacadfb91994475d8bebfa577b0bca68",
-      urlSchemeIOS: "KhaltiPayFlutterExampleScheme",
-    );
+FlutterKhalti _flutterKhalti = FlutterKhalti.configure(
+  publicKey: "test_public_key_eacadfb91994475d8bebfa577b0bca68",
+  urlSchemeIOS: "KhaltiPayFlutterExampleScheme",
+);
 
-    KhaltiProduct product = KhaltiProduct(
-      id: "test",
-      amount: 1000,
-      name: "Hello Product",
-    );
+KhaltiProduct product = KhaltiProduct(
+  id: "test",
+  amount: 1000,
+  name: "Hello Product",
+);
 
-    _flutterKhalti.startPayment(
-      product: product,
-      onSuccess: (data) {
-        print("Success message here");
-      },
-      onFaliure: (error) {
-        print("Error message here");
-      },
-    );
+_flutterKhalti.startPayment(
+  product: product,
+  onSuccess: (data) {
+    print("Success message here");
+  },
+  onFaliure: (error) {
+    print("Error message here");
+  },
+);
 ```
