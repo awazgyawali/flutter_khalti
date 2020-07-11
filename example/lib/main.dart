@@ -15,24 +15,24 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-  _payViaKhalti() {
-    FlutterKhalti(
-      urlSchemeIOS: "KhaltiPayFlutterExampleScheme",
+  _payViaKhalti() async {
+    FlutterKhalti _flutterKhalti = FlutterKhalti.configure(
       publicKey: "test_public_key_eacadfb91994475d8bebfa577b0bca68",
-      productId: "1233",
-      productName: "Test 2",
-      amount: 12121,
-      customData: {
-        "test": "asass",
-      },
-    ).initPayment(
+      urlSchemeIOS: "KhaltiPayFlutterExampleScheme",
+    );
+
+    KhaltiProduct product = KhaltiProduct(
+      id: "test",
+      amount: 1000,
+      name: "Hello Product",
+    );
+    _flutterKhalti.startPayment(
+      product: product,
       onSuccess: (data) {
-        print("success");
-        print(data);
+        print("here");
       },
-      onError: (error) {
-        print("error");
-        print(error);
+      onFaliure: (error) {
+        print("sorry");
       },
     );
   }
@@ -47,9 +47,7 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: FlatButton(
             child: Text("Pay via khalti"),
-            onPressed: () {
-              _payViaKhalti();
-            },
+            onPressed: _payViaKhalti,
           ),
         ),
       ),

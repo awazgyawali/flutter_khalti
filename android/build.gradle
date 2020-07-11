@@ -44,7 +44,7 @@ android {
 }
 
 dependencies {
-    implementation ('com.khalti:khalti-android:2.00.00') {
+    implementation ('com.khalti:khalti-android:2.00.01') {
         transitive = true
     }
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
