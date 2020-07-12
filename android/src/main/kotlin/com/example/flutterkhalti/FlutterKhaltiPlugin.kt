@@ -96,7 +96,7 @@ class FlutterKhaltiPlugin : MethodCallHandler {
                 val errorMessage: HashMap<String, String> = HashMap()
                 errorMessage["action"] = action
                 errorMessage["message"] = errorMap.toString()
-                channel.invokeMethod("khalti#success", errorMessage)
+                channel.invokeMethod("khalti#error", errorMessage)
             }
         })
                 .additionalData(params["customData"] as Map<String, Any>?)
