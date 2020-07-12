@@ -19,6 +19,9 @@ class _MyAppState extends State<MyApp> {
     FlutterKhalti _flutterKhalti = FlutterKhalti.configure(
       publicKey: "test_public_key_eacadfb91994475d8bebfa577b0bca68",
       urlSchemeIOS: "KhaltiPayFlutterExampleScheme",
+      paymentPreferences: [
+        KhaltiPaymentPreference.KHALTI,
+      ],
     );
 
     KhaltiProduct product = KhaltiProduct(

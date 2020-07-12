@@ -172,10 +172,20 @@ class KhaltiProduct {
   }
 }
 
+/// Configuration for payment methods within khalti SDK
 enum KhaltiPaymentPreference {
+  /// Respected only on Android, iOS will show this option anyway
   KHALTI,
+
+  /// Respected on both Android and iOS
   EBANKING,
+
+  /// Respected on only Android, iOS SDK doesnt support it
   MOBILE_BANKING,
+
+  /// Respected on only Android, iOS SDK doesnt support it
   CONNECT_IPS,
+
+  /// Respected on only Android, iOS SDK doesnt support it
   SCT,
 }

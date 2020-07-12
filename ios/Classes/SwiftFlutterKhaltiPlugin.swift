@@ -25,14 +25,44 @@ public class SwiftFlutterKhaltiPlugin: NSObject, FlutterPlugin, KhaltiPayDelegat
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
+        //TODO: Remove this once the deprecated apis are removed
         case "khalti#start":
             initPayment(args: call.arguments!)
+            result(true)
+            break;
+        case "khalti#startPayment":
+            startPayment(call: call)
+            result(true)
             break;
         default:
             break;
         }
     }
     
+    func startPayment(call: FlutterMethodCall){
+        let message = call.arguments as? Dictionary<String,Any>
+        let publicKey =  message!["publicKey"] as? String
+        let khaltiUrlScheme:String = toString(data: message!["urlSchemeIOS"]!)
+        let product = message!["product"] as? Dictionary<String,Any>
+        let paymentPreferences = message!["paymentPreferences"] as? [String]
+        
+        let _CONFIG:Config = Config(
+            publicKey: toString(data: publicKey!),
+            amount: toInt(json: product!["amount"]!),
+            productId: toString(data: product!["id"]!),
+            productName: toString(data: product!["name"]!),
+            productUrl:toString(data: product!["url"]!),
+            additionalData: (product!["customData"] as! Dictionary<String, String>),
+            ebankingPayment: paymentPreferences?.contains("ebanking") ?? true
+        );
+        
+        Khalti.shared.appUrlScheme = khaltiUrlScheme
+        
+        Khalti.present(caller: viewController, with: _CONFIG, delegate: self)
+    }
+    
+    
+    //TODO: Remove this once the deprecated apis are removed
     func initPayment(args:Any){
         var arguments = args as? [String:Any];
         
@@ -45,14 +75,18 @@ public class SwiftFlutterKhaltiPlugin: NSObject, FlutterPlugin, KhaltiPayDelegat
     }
     
     public func onCheckOutSuccess(data: Dictionary<String, Any>) {
+        //TODO: Remove this once the deprecated apis are removed
         channel.invokeMethod("khalti#success",arguments:  data)
+        channel.invokeMethod("khalti#paymentSuccess",arguments:  data)
     }
     
     public func onCheckOutError(action: String, message: String, data: Dictionary<String, Any>?) {
         var d = data!
         d.updateValue(message, forKey: "message")
         d.updateValue(action, forKey: "action")
+        //TODO: Remove this once the deprecated apis are removed
         channel.invokeMethod("khalti#error",arguments: data)
+        channel.invokeMethod("khalti#paymentError",arguments: data)
     }
     
     func toString(data:Any) -> String{
