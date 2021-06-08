@@ -2,6 +2,7 @@
 
 - Removed depricated methods
 - Migrated to null saftey
+
 ## 1.0.0
 
 - New API pattern
