@@ -1,21 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class FlutterKhalti {
   static const MethodChannel _channel = const MethodChannel('flutter_khalti');
-  final String publicKey, urlSchemeIOS;
-  @deprecated
-  String _productId, _productName, _productUrl;
-  @deprecated
-  double _amount;
-  @deprecated
-  Map<String, String> customData;
+  late final String publicKey, urlSchemeIOS;
+
   List<KhaltiPaymentPreference> paymentPreferences;
 
   /// Configure the payment gateway
   FlutterKhalti.configure({
-    @required this.publicKey,
-    @required this.urlSchemeIOS,
+    required this.publicKey,
+    required this.urlSchemeIOS,
     this.paymentPreferences = const [
       KhaltiPaymentPreference.KHALTI,
       KhaltiPaymentPreference.CONNECT_IPS,
@@ -26,9 +20,9 @@ class FlutterKhalti {
   });
 
   void startPayment({
-    KhaltiProduct product,
-    Function(Map) onSuccess,
-    Function(Map) onFaliure,
+    required KhaltiProduct product,
+    required Function(Map) onSuccess,
+    required Function(Map) onFaliure,
   }) async {
     _channel.invokeMethod("khalti#startPayment", {
       "publicKey": publicKey,
@@ -41,46 +35,8 @@ class FlutterKhalti {
     _listenToPaymentResponse(onSuccess, onFaliure);
   }
 
-  /// Depricated, use `FlutterKhalti.configure` instead
-  @deprecated
-  FlutterKhalti({
-    @required String publicKey,
-    @required String productId,
-    @required String productName,
-    @required String urlSchemeIOS,
-    @required double amount,
-    @required List<KhaltiPaymentPreference> paymentPreferences,
-    String productUrl = "",
-    Map<String, String> customData = const {},
-  })  : this.publicKey = publicKey,
-        this._productId = productId,
-        this._productName = productName,
-        this._productUrl = productUrl,
-        this.urlSchemeIOS = urlSchemeIOS,
-        this._amount = amount,
-        this.paymentPreferences = paymentPreferences,
-        this.customData = customData;
-
-  /// Depricated, use `FlutterKhalti.startPayment` instead
-  @deprecated
-  initPayment({Function onSuccess, Function onError}) {
-    _channel.invokeMethod("khalti#start", {
-      "publicKey": publicKey,
-      "productId": _productId,
-      "productName": _productName,
-      "productUrl": _productUrl,
-      "urlSchemeIOS": urlSchemeIOS,
-      "amount": _amount,
-      "paymentPreferences": paymentPreferences
-          .map((e) => _paymentPreferencesString[e.index])
-          .toList(),
-      "customData": customData,
-    });
-    _listenToResponse(onSuccess, onError);
-  }
-
   _listenToResponse(Function onSuccess, Function onError) {
-    _channel.setMethodCallHandler((call) {
+    _channel.setMethodCallHandler((call) async {
       switch (call.method) {
         case "khalti#success":
           onSuccess(call.arguments);
@@ -100,7 +56,7 @@ class FlutterKhalti {
   }
 
   _listenToPaymentResponse(Function onSuccess, Function onError) {
-    _channel.setMethodCallHandler((call) {
+    _channel.setMethodCallHandler((call) async {
       switch (call.method) {
         case "khalti#paymentSuccess":
           onSuccess(call.arguments);
@@ -136,20 +92,20 @@ class KhaltiProduct {
   final double amount;
 
   /// If specified, the configuration from the `config` is ignored but not overridden
-  final List<KhaltiPaymentPreference> paymentPreferences;
+  final List<KhaltiPaymentPreference>? paymentPreferences;
 
   /// Custom data attached to the payment
   final Map<String, String> customData;
 
   KhaltiProduct({
     // The id of the product
-    @required this.id,
+    required this.id,
 
     /// The name of the product
-    @required this.name,
+    required this.name,
 
     /// The amount of the product in paisa
-    @required this.amount,
+    required this.amount,
 
     /// If specified, the configuration from the `config` is ignored but not overridden
     this.paymentPreferences,

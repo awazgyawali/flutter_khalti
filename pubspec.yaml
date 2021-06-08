@@ -1,11 +1,11 @@
 name: flutter_khalti
 description: A fluter plugin to process khalti payment
-version: 1.0.0
+version: 1.1.0
 author: Aawaz Gyawali <awazgyawali@gmail.com>
 homepage: https://github.com/awazgyawali/flutter_khalti
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
