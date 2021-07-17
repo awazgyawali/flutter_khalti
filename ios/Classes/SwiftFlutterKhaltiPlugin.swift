@@ -25,11 +25,6 @@ public class SwiftFlutterKhaltiPlugin: NSObject, FlutterPlugin, KhaltiPayDelegat
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
-        //TODO: Remove this once the deprecated apis are removed
-        case "khalti#start":
-            initPayment(args: call.arguments!)
-            result(true)
-            break;
         case "khalti#startPayment":
             startPayment(call: call)
             result(true)
@@ -61,31 +56,14 @@ public class SwiftFlutterKhaltiPlugin: NSObject, FlutterPlugin, KhaltiPayDelegat
         Khalti.present(caller: viewController, with: _CONFIG, delegate: self)
     }
     
-    
-    //TODO: Remove this once the deprecated apis are removed
-    func initPayment(args:Any){
-        var arguments = args as? [String:Any];
-        
-        let khaltiUrlScheme:String = toString(data: arguments!["urlSchemeIOS"])
-        let _CONFIG:Config = Config(publicKey: toString(data: arguments!["publicKey"]), amount: toInt(json: arguments!["amount"]), productId: toString(data: arguments!["productId"]), productName: toString(data: arguments!["productName"]), productUrl:toString(data: arguments!["productUrl"]))
-        
-        Khalti.shared.appUrlScheme = khaltiUrlScheme
-        Khalti.present(caller: viewController, with: _CONFIG, delegate: self)
-        
-    }
-    
     public func onCheckOutSuccess(data: Dictionary<String, Any>) {
-        //TODO: Remove this once the deprecated apis are removed
-        channel.invokeMethod("khalti#success",arguments:  data)
         channel.invokeMethod("khalti#paymentSuccess",arguments:  data)
     }
     
     public func onCheckOutError(action: String, message: String, data: Dictionary<String, Any>?) {
-        var d = data!
+        var d = data ?? Dictionary<String, Any>()
         d.updateValue(message, forKey: "message")
         d.updateValue(action, forKey: "action")
-        //TODO: Remove this once the deprecated apis are removed
-        channel.invokeMethod("khalti#error",arguments: data)
         channel.invokeMethod("khalti#paymentError",arguments: data)
     }
     

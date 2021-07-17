@@ -1,5 +1,9 @@
 ## 1.1.0
 
+- Added crash fix on iOS devices
+
+## 1.1.0
+
 - Removed depricated methods
 - Migrated to null saftey
 

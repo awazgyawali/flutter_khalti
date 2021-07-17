@@ -17,7 +17,7 @@ class _MyAppState extends State<MyApp> {
 
   _payViaKhalti() async {
     FlutterKhalti _flutterKhalti = FlutterKhalti.configure(
-      publicKey: "test_public_key_eacadfb91994475d8bebfa577b0bca68",
+      publicKey: "test_public_key_3a160d15bd484b8c85afd78eb621e49b",
       urlSchemeIOS: "KhaltiPayFlutterExampleScheme",
       paymentPreferences: [
         KhaltiPaymentPreference.KHALTI,
